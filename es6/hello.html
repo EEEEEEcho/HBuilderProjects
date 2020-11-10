@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// var容易出现变量越界
+			for(var i=0;i < 5;i ++){
+				console.log(i);
+			}
+			console.log("我在循环外:" + i);
+			// let声明的局部变量
+			for(let j=0;j < 5;j ++){
+				console.log(j);
+			}
+			//console.log("我在循环外:" + j);
+			const MAX = 100;
+			//MAX = 1000;	//会报错
+			const s = "hello es6";
+			console.log(s.includes("es"));
+			const ss = `
+				Hello
+				es
+				hola
+			`;		// 使用 ` 可以定义长字符串
+			console.log(ss);
+			const arr=[10,20,30];
+			// 数组解包
+			const [x,y,z] = arr;
+			console.log(x,y,z);
+			
+			// 字典解包
+			let person1 = {name:"Echo",sex:"male"};
+			const {name:Pname,sex:Psex} = person1;
+			console.log(Pname,Psex);
+		</script>
+		<script>
+			function fun1(a,b){
+				b = b || 1;	//如果b为空 则赋值b为1，
+				console.log(a / b);
+			}
+			fun1(10);
+			//es6中。默认参数，其实就和python一样
+			function fun2(a,b=2){
+				console.log(a / b);
+			}
+			fun2(10);
+		</script>
+		<script>
+			//lambda表达式  (参数列表)=>{业务逻辑}
+			let fun3 = (i2) => {
+				console.log(i2);
+			}
+			fun3(1000);
+			
+			let fun4 =(m,n) => {
+				console.log(m + n);
+			}
+			fun4(50,100);
+			
+			const person = {
+				name:"张三",
+				eat: function(food){
+					console.log(this.name + " eat " + food);
+				},
+				drink:(water) => {
+					console.log(person.name + " drink " + water);
+				},
+				hool(food){
+					console.log(this.name + " hool "  + food);
+				}
+			};
+			
+			person.eat("baba");
+			person.drink("dabain");
+			person.hool("hh");
+			
+			const person2 = {
+				name:"lisi",
+				age:30
+			};
+			
+			const fun5 = (p) => {
+				console.log(p.name);
+			};
+			fun5(person2);
+			
+			const fun6 = ({name}) => {
+				console.log(name);
+			}
+			fun6(person2);
+		</script>
+		<script>
+			let arr1 = [10,20,30];
+			console.log(arr1.map(a => a * 10));
+			//和python中的reduce用法类似
+			let tmparr = arr1.reduce((a,b) => a + b);
+			console.log(tmparr);
+			//以100 为第一个a，以10为第一个b，进行
+			let tmp2 = arr1.reduce((a,b) => a + b,100);
+			console.log(tmp2); 
+		</script>
+		<script>
+			let person3 = {name:"jack",age:18,sex:"male"};
+			console.log(Object.keys(person3));	//获取字典中的所有键
+			console.log(Object.entries(person3));	//获取字典中的所有entry
+			
+			let pp = {xxx:"yyy",zzz:"aaa"};
+			Object.assign(pp,person3);
+			console.log(pp);		//将person3中的键值对复制到pp中
+		</script>
+		<script>
+			let arr2 =[10,20,30,40,50];
+			console.log(arr2.find(a=>a==30));
+			let persons = [
+				{name:"jack",age:18,sex:"male"},
+				{name:"echo",age:19,sex:"male"},
+				{name:"xsss",age:20,sex:"male"}
+			];
+			let tmp3 = persons.find(p => p.age == 20);
+			console.log(tmp3);
+			let tmp4 = persons.findIndex(p => p.age= 20);
+			console.log(tmp4);
+		</script>
+	</body>
+</html>
