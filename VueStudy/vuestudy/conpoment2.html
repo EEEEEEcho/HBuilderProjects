@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+	<body>
+		<!-- 在vue中所有的实例都可以认为是组件 -->
+		<div id="app">
+			<!-- :title加上这个 : 就表示这是一个数据模型，这是动态传递的方法。将这个字符串代表的值传入了 -->
+			<!-- 如果不加:  则是静态传递，直接传递的是属性中的值-->
+			<!-- @incre 自定义属性，将父组件中的方法传递给子组件中，然后子组件通过调用父组件传递的方法来修改父组件中数据模型的值。-->
+			<!-- 这个num1 就是取到的父组件中的num的值，然后它被用到了子组件中 -->
+			<counter :num1="num" title="hhhhhh" @incre1="incr()"></counter>
+		</div>
+	</body>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script>
+		//定义vue组件,第一个参数是该组件的名字，第二这大括号是组件对象
+		Vue.component("counter",{
+			template: "<button @click='subConIncre'>你过来啊！{{num1}} - {{title}}</button>",
+			//不进行验证的属性
+			//props:["num1"],
+			//对传入的属性进行验证	
+			props: {
+				num1: {		//添加约束
+					type: Number,
+					default: 0,
+					required: true
+				},
+				title: {
+					type: String
+				}
+			},
+			methods: {
+				subConIncre(){
+					//调用父组件传递过来的方法
+					this.$emit("incre1");
+				}
+			}
+		});
+		//父组件
+		const app = new Vue({
+			el :"#app",
+			data :{
+				//num: "abc" 如果传入的不是所要求的数据格式，vue还是会对其进行渲染，但是会在console产生一个警告
+				num: 10
+			},
+			methods:{
+				incr(){
+					this.num ++;
+				}
+			}
+		});
+		//这里需要说明一下，<div id="app"> 是父组件，该组件中的数据模型中有一个num。
+		//然后在子组件counter中，使用:num1 定义了一个属性名，然后值是传递的父组件的数据模型中的num
+		//然后在子组件counter中，通过props属性，获取到父组件中的属性
+	</script>
+</html>

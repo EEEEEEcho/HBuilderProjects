@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.active{
+				
+			}
+		</style>
+	</head>
+	<body>
+		<!-- vue对象的html模板 -->
+		<div id="app">
+			<!-- 双向绑定 v-model -->
+			<input type="text" v-model="num" />
+			<!-- v-on:事件名=js表达式 -->
+			<input type="button" value="nihao" v-on:click="num++" />
+			<!-- v-on:可以简写为@ -->
+			<input type="button" value="nihao2" @click="increment" />
+			<!-- 右击事件 -->
+			<input type="button" value="右击事件" @contextmenu="increment" />
+			<!-- 右击事件并屏蔽菜单 -->
+			<input type="button" value="右击事件不弹窗" @contextmenu.prevent="increment" />
+			<!-- <input type="button" value"右击事件" @contextmenu="increment" /> -->
+			<!-- 花括号中的内容是js表达式-->
+			<br>
+			回车提交<input type="text" v-model="submitValue" @keyup.enter="submit" />
+			<br>
+			组合按键<input type="text" @keyup.alt.67="combineKey" />
+			<h1>Hello world,My name is {{name}} and my name is <span v-text="name"></span>,I have {{ sum() }} girl friends.</h1><br>
+			<h1>{{1 + 1}}</h1>
+			<!-- v-html将html标签渲染出来 -->
+			<h1>v-html 测试 <span v-html="htm"></span></h1>
+			<input type="checkbox" value="ios" v-model="language" />ios
+			<input type="checkbox" value="java" v-model="language" />java
+			<input type="checkbox" value="php" v-model="language" />php
+			<h3>您选择了:{{language.join(",")}}</h3>
+			<hr>
+			<!-- 遍历数组 -->
+			<ul>
+				<!-- 使用这个 :key="index"可以提高渲染效率 -->
+				<li v-for="(user,index) in users" :key="index">{{index}}.{{user.name}}-{{user.gender}}-{{user.age}}</li>
+			</ul>
+			<!-- v-if 和 v-for的结合,v-for要先于v-if执行，因为只有v-for执行了，v-if才可以判断-->
+			<ul>
+				<!-- 使用这个 :key="index"可以提高渲染效率 -->
+				<li v-if="user.gender == '女'" v-for="(user,index) in users" :key="index">{{index}}.{{user.name}}-{{user.gender}}-{{user.age}}</li>
+			</ul>
+			<!-- 遍历对象 -->
+			<br>
+			<ul>
+				<li v-for="(key,value) in person" :key="key">{{key}}**{{value}}</li>
+			</ul>
+			<!--  -->
+			<br>
+			<input type="button" value="click me to random" @click="random=Math.random()" />{{random}}<br>
+			<span v-if="random > 0.25 && random < 0.5">大于0.25</span> <!-- 注意，在if标签，和if-else标签之间，不能有其他没有包含if或if-else的标签-->
+			<span v-else-if="random > 0.5 && random < 0.75">大于0.5</span>
+			<span v-else>大于0.75</span>
+			<!-- v-bind 将标签属性与vue对象中的数据模型进行绑定   简写形式就是 ':'  -->
+			<br>
+			<input type="button" v-bind:value="button_value" /><br>
+			<!-- 将标签样式与vue对象中的数据模型进行绑定，当store大于0时，active样式被激活 -->
+			<input type="button" v-bind:class="{active: store > 0}" value="加入购物车" />
+			<!-- 渲染日期类型,将时间戳变为时间日期类型 -->
+			<hr>
+			<div>定义方法渲染:{{getBirthday()}}</div>
+			<div>计算属性渲染:{{computeBirthday}}</div>
+			<!-- 监听 -->
+			<input type="text" v-model="search" />
+		</div>
+	</body>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script>
+		//初始化一个vue实例
+		const app = new Vue({
+			el: "#app", //element选择器
+			data: { //定义数据模型
+				name: "Echo",
+				num: 1000,
+				htm: "<span>刘老板</span>",
+				language: [],
+				submitValue: 1,
+				users: [{
+						name: '柳岩',
+						gender: '女',
+						age: 21
+					},
+					{
+						name: '峰哥',
+						gender: '男',
+						age: 18
+					},
+					{
+						name: '范冰冰',
+						gender: '女',
+						age: 24
+					},
+					{
+						name: '刘亦菲',
+						gender: '女',
+						age: 18
+					},
+					{
+						name: '古力娜扎',
+						gender: '女',
+						age: 25
+					}
+				],
+				person: {
+					name: '柳岩',
+					gender: '女',
+					age: 21
+				},
+				show: true,
+				random: 0,
+				button_value: "Hello world",
+				store: 0,
+				birthday: 1529032123201,
+				search: ""
+			},
+			methods: {
+				increment(ev) {
+					ev.preventDefault(); //禁止默认事件，右击就不会有菜单栏弹出
+					console.log(this);
+					this.num++;
+				},
+				decrement() {
+					this.num--;
+				},
+				sum() {
+					return this.num + 100;
+				},
+				submit() {
+					console.log(this.submitValue);
+				},
+				combineKey() {
+					alert("alt + c");
+				},
+				getBirthday(){
+					let date = new Date(this.birthday);
+					return date.getFullYear() + "年" + date.getMonth() + "月" + date.getDay() + "日";
+				}
+			},
+			//计算属性,一定要有返回值,说白了，计算属性就是将属性进行一定运算之后
+			//获得的值。所以它总体就是一个值，跟使用数据模型的方法时一样的
+			//计算属性可以像数据模型一样使用，如果计算属性的依赖项没有改变，会直接从缓存命中。
+			computed: {
+				computeBirthday(){
+					let date = new Date(this.birthday);
+					return date.getFullYear() + "年" + date.getMonth() + "月" + date.getDay() + "日";
+				}
+			},
+			//监听
+			watch: {
+				search(newVal,oldVal){
+					//newVal监听到的新值，oldVal原来的旧值
+					//监听到数据变化后，将新值发送给后台
+					console.log(newVal,oldVal);
+				}
+			},
+			//钩子函数 created,一般使用这个钩子函数，在vue对象创建之后发送ajax请求到后台微服务，请求数据。
+			created() {
+				//ajax 成功
+				this.num = 2000;
+			}
+
+		});
+	</script>
+</html>

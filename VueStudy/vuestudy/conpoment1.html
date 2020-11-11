@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>局部组件</title>
+	</head>
+	<body>
+		<!-- 在vue中所有的实例都可以认为是组件 -->
+		<div id="app">
+			<child1></child1>
+		</div>
+	</body>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script>
+		//定义局部子组件
+		const child = {
+			template: "<div>Hello world: I'm {{name}}</div>",
+			data(){
+				return{
+					name: "吴彦祖"
+				}
+			}
+		}
+		//父组件
+		const app = new Vue({
+			el :"#app",
+			data :{
+				num: 0
+			},
+			//局部组件要通过components来使用
+			components: {
+				child1 : child	//值是定义的局部组件对象
+			}
+		});
+	</script>
+</html>

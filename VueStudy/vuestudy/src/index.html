@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>index</title>
+	</head>
+	<body>
+		<div id="app">
+			<span><router-link to="/login">登录页</router-link></span>
+			<span><router-link to="/register">注册页</router-link></span>
+			<hr>
+			<router-view></router-view>	<!-- 锚点，将子组件加载到锚点 -->
+			<!-- <login-form></login-form>
+			<register-form></register-form> -->
+			<!-- 这里使用login-form 即采用 - 的原因是咱们自定义的组件名为loginForm,registerForm
+			 是采用的驼峰命名。而html中的标签都会转换为小写，所以真正显示的时候会变成loginform和registerform，
+			 所以会出现无法找到组件的情况。但是采用 - 就可以解决这个问题-->
+		</div>
+	</body>
+	<script src="../node_modules/vue/dist/vue.js"></script>
+	<!-- 路由 -->
+	<script src="../node_modules/vue-router/dist/vue-router.js"></script>
+	<script src="js/login.js"></script>
+	<script src="js/register.js"></script>
+	<script>
+		
+		const router = new VueRouter({
+			routes: [
+				{
+					path: "/login",	//路由路径，以 '/'开头，通过这个路径跳转到相应组件
+					component: loginForm
+				},
+				{
+					path: "/register",
+					component: registerForm
+				}
+			]
+		})
+		
+		const app = new Vue({
+			el :"#app",
+			// components: {
+			// 	loginForm: loginForm,
+			// 	registerForm: registerForm
+			// },
+			router	//引入route路由与父组件进行关联，这个路由会加载这个组件
+		});
+		
+	</script>
+</html>

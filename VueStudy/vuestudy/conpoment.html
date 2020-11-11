@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>全局组件</title>
+	</head>
+	<body>
+		<!-- 在vue中所有的实例都可以认为是组件 -->
+		<div id="app">
+			<!-- 通过全局组件的组件名来使用子组件 -->
+			<counter></counter>
+		</div>
+	</body>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script>
+		//定义vue组件,第一个参数是该组件的名字，第二这大括号是组件对象
+		Vue.component("counter",{
+			template: "<button @click='num++'>你过来啊！{{num}}</button>",
+			data(){ //组件的data属性必须是函数，这是为了保证组件之间相互不受影响
+				return{		//返回值是一个数据模型
+					num: 0
+				}
+			}
+		})
+		//父组件
+		const app = new Vue({
+			el :"#app",
+			data :{
+				num: 0
+			}
+		});
+	</script>
+</html>
