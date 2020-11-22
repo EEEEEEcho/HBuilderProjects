@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            /* 修改字体大小 但是标题标签需要重新指定大小 */
+            font-size: 24px;
+        }
+        h2 {
+            font-family: '微软雅黑';
+        }
+        p {
+            /**
+            如果定义了第一个字体，那么浏览器会从第一个开始找，如果电脑中没有安装，则从第二个继续找，
+
+            **/
+            font-family: 'Microsoft Yahei',Arial, Helvetica, sans-serif; 
+            /* 修改字体粗细 */
+            /* font-weight: 700; */
+        }
+        .bold {
+            font-weight: 700;  /* 等价于font-weight: bold; 实际开发中一般都是使用 数字*/
+        }
+        .title {
+            font-weight: 400;
+        }
+        .p1 {
+            /* 设置字体风格，斜体 */
+            font-style: italic;
+        }
+        em {
+            /* 让倾斜的字体正回来 */
+            font-style: normal;
+        }
+        div {
+            /* font-style: italic;
+            font-weight: 700;
+            font-size: 16px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+
+            /* 使用复合属性将上述代码简化,一定要注意属性的顺序，不能颠倒 */
+            /* font: font-style font-weight font-size/line-height font-family */
+            /* 不要的属性可以省略，但是，font-size 和 font-family不能省略 */
+            font: italic 700 32px 'Microsoft Yahei';
+        }
+    </style>
+</head>
+<body>
+    <h2 class="title">烟花易冷</h2>
+    <p class="p1">繁华声遁入空门折煞了世人</p>
+    <em>脉动回来</em>
+    <p class="bold">梦偏冷辗转一生情债有几本</p>
+    <p>如你默认</p>
+    <p>生死苦等</p>
+    <p>苦等一圈又一圈的年轮</p>
+
+    <div>
+        三生三世，天天撸码。
+    </div>
+</body>
+</html>
