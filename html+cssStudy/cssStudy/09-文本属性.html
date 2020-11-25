@@ -10,12 +10,45 @@
             /* color: #e63434; */       /*16进制使用最多*/
             color: rgb(255, 0, 0);
             /*实现文本的水平居中对齐,本质是让盒子里面的文字进行对其，而不是让盒子居中对齐*/
-            text-align: center;     
+            text-align: center;
+            /* 下划线 */
+            /* text-decoration: underline; */
+            /* 删除线 */
+            /* text-decoration: line-through;  */
+            /* 上划线 */
+            text-decoration: overline;
+        }
+        a {
+            /* 取消链接的下划线 */
+            text-decoration: none;
+        }
+        p {
+            /* 首行缩进20px */
+            /* text-indent: 20px; */
+            /* 使用em会缩进当前元素的相对大小，就是以一个元素为单位进行缩进 */
+            text-indent: 2em;
+            /* 行高 */
+            line-height: 20px;
+        }
+        #china {
+            /* 调整行高 */
+            line-height: 60px;
         }
     </style>
 </head>
 <body>
     <div>听说喜欢粉色的都喜欢男人</div>
-    
+    <a href="#">听说喜欢粉色的都喜欢男人</a>
+    <p>
+        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+        哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+    </p>
+    <p>
+        淦干干干
+    </p>
+    <div id="china">
+        中国人
+    </div>
 </body>
 </html>
